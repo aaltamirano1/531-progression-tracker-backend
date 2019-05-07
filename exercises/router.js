@@ -22,7 +22,8 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
   Exercise
     .create({
       name: req.body.name,
-      orm: req.body.orm
+      orm: req.body.orm,
+      user: req.user.id
     })
     .then(post=>res.status(201).json())
     .catch(err => {
