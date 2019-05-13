@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const {User} = require('./model');
 
 const router = express.Router();
-
+const passport = require('passport');
+const jwtAuth = passport.authenticate('jwt', { session: false });
 const jsonParser = bodyParser.json();
 
 // Post to register a new user
@@ -125,6 +126,50 @@ router.post('/', jsonParser, (req, res) => {
         return res.status(err.code).json(err);
       }
       res.status(500).json({code: 500, message: 'Internal server error, unable to create new user.'});
+    });
+});
+
+router.put('/:id/units', jwtAuth, jsonParser, (req, res)=>{
+  const requiredFields = ['units'];
+  requiredFields.forEach(field => {
+    if(!(field in req.body)){
+      const msg = `Missing ${field} in request body.`;
+      console.error(msg);
+      return res.status(400).send(msg);
+    }
+  });
+
+  const invalidUnit = requiredFields.find(
+    field => req.body[field] !== "lbs." &&  req.body[field] !== "kg."
+  );
+
+  if (invalidUnit) {
+    return res.status(400).json({
+      code: 400,
+      reason: 'Bad request.',
+      message: 'Unit must be lbs. or kg.',
+      location: invalidUnit
+    });
+  }
+
+  const toUpdate = {};
+  const updatableFields = ['units'];
+  updatableFields.forEach(field=>{
+    if(field in req.body){
+      toUpdate[field] = req.body[field];
+    }
+  });
+
+  User
+    .findOneAndUpdate({_id: req.params.id}, {$set: toUpdate})
+    .then(updatedUser=>{
+      res.status(200).json({
+        units: updatedUser.units
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "Internal server error with updating user's unit of measurement." });
     });
 });
 
