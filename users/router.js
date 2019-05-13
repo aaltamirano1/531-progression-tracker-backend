@@ -164,7 +164,7 @@ router.put('/:id/units', jwtAuth, jsonParser, (req, res)=>{
     .findOneAndUpdate({_id: req.params.id}, {$set: toUpdate})
     .then(updatedUser=>{
       res.status(200).json({
-        units: updatedUser.units
+        units: toUpdate.units
       });
     })
     .catch(err => {
