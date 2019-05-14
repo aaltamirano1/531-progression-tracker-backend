@@ -34,15 +34,6 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
 });
 
 router.put('/:id', jwtAuth, jsonParser, (req, res)=>{
-  const requiredFields = ['name', 'orm'];
-  requiredFields.forEach(field => {
-    if(!(field in req.body)){
-      const msg = `Missing ${field} in request body.`;
-      console.error(msg);
-      return res.status(400).send(msg);
-    }
-  });
-
   const toUpdate = {};
   const updatableFields = ['name', 'orm', 'week', 'notes'];
   updatableFields.forEach(field=>{
