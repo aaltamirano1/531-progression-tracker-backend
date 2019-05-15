@@ -1,5 +1,5 @@
 'use strict';
-const {Entry} = require('./model');
+const {Exercise} = require('./model');
 const {router} = require('./router');
 
-module.exports = {Entry, router};
+module.exports = {Exercise, router};

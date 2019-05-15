@@ -7,7 +7,9 @@ const path = require('path');
 
 const { router: usersRouter } = require('./users');
 const { router: exercisesRouter } = require('./exercises');
+const { router: notesRouter } = require('./notes');
 const { Exercise } = require('./exercises/model');
+const { Note } = require('./Notes/model');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;
@@ -32,6 +34,7 @@ passport.use(jwtStrategy);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
+app.use('/notes', notesRouter);
 app.use('/auth', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
