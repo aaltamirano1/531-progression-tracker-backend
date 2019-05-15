@@ -1,6 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const {User} = require('../users/model');
+const {noteSchema} = require('../notes/model');
 
 mongoose.Promise = global.Promise;
 

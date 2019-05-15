@@ -9,7 +9,7 @@ const { router: usersRouter } = require('./users');
 const { router: exercisesRouter } = require('./exercises');
 const { router: notesRouter } = require('./notes');
 const { Exercise } = require('./exercises/model');
-const { Note } = require('./Notes/model');
+const { Note } = require('./notes/model');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;

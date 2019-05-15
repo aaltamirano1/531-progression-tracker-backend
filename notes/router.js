@@ -19,7 +19,7 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
   Note
     .create({
       content: req.body.content,
-      exercise: req.exercise.id
+      exercise: req.body.exercise_id
     })
     .then(post=>res.status(201).json())
     .catch(err => {
