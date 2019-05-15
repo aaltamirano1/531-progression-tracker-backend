@@ -47,7 +47,7 @@ router.put('/:id', jwtAuth, jsonParser, (req, res)=>{
 });
 
 router.get('/by-exercise/:exercise_id', (req, res) => {
-  return Note.find({exercise: req.params.exercise_id})
+  return Note.find({exercise_id: req.params.exercise_id})
     .then(notes => {
       res.json(notes);
     })
