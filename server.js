@@ -39,10 +39,6 @@ app.use('/auth', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-app.get('/', function(req, res) {
-    res.sendFile('index.html', {root: __dirname });
-});
-
 app.use('*', (req, res) => {
   return res.status(404).json({ message: 'Not Found' });
 });
