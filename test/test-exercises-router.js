@@ -71,7 +71,7 @@ describe('Exercises', function(){
 			expect(res.body).to.deep.equal(updatedExercise);
     });
 	});
-	it('Should get an exercises by associated user id on GET /exercises/by-user/:user_id', function(){
+	it('Should get exercises by associated user id on GET /exercises/by-user/:user_id', function(){
 		return User.find()
 		.then(users=>{
 			return chai
@@ -85,7 +85,7 @@ describe('Exercises', function(){
 			expect(res.body[0]).to.include.keys('name', 'orm', 'week', 'user', '_id');
     });
 	});
-	it('Should get an exercises by associated user id on GET /exercises/:id', function(){
+	it('Should get an exercise by its id on GET /exercises/:id', function(){
 		return Exercise.find()
 		.then(exercises=>{
 			return chai
