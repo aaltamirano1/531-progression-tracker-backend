@@ -35,7 +35,7 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
 
 router.put('/:id', jwtAuth, jsonParser, (req, res)=>{
   const toUpdate = {};
-  const updatableFields = ['name', 'orm', 'week', 'notes'];
+  const updatableFields = ['name', 'orm', 'week'];
   updatableFields.forEach(field=>{
     if(field in req.body){
       toUpdate[field] = req.body[field];
@@ -47,10 +47,9 @@ router.put('/:id', jwtAuth, jsonParser, (req, res)=>{
     .then(updatedExercise=>{
       console.log(`Updated item with id ${req.params.id}.`);
       res.status(200).json({
-        name: updatedExercise.name,
-        orm: updatedExercise.orm,
-        week: updatedExercise.week,
-        notes: updatedExercise.notes
+        name: toUpdate.name,
+        orm: toUpdate.orm,
+        week: toUpdate.week
       });
     })
     .catch(err => {

@@ -19,10 +19,6 @@ const exerciseSchema = mongoose.Schema({
     required: false,
     default: 1
   },
-  notes: {
-    type: Array,
-    required: false
-  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
