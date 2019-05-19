@@ -38,7 +38,7 @@ router.put('/:id', jwtAuth, jsonParser, (req, res)=>{
     .findOneAndUpdate({_id: req.params.id}, {$set: toUpdate})
     .then(updatedNote=>{
       console.log(`Updated note with id ${req.params.id}.`);
-      res.status(200).json({content: updatedNote.content});
+      res.status(200).json({content: toUpdate.content});
     })
     .catch(err => {
       console.error(err);

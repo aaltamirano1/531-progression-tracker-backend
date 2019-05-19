@@ -63,7 +63,7 @@ function seedNoteData(exercises) {
     });
   }
   // this will return a promise
-  return Exercise.insertMany(seedData);
+  return Note.insertMany(seedData);
 }
 
-module.exports = {TEST_DATABASE_URL, User, Exercise, Note, app, runServer, closeServer, tearDownDb, seedUserData, seedExerciseData}
+module.exports = {TEST_DATABASE_URL, User, Exercise, Note, app, runServer, closeServer, tearDownDb, seedUserData, seedExerciseData, seedNoteData}
