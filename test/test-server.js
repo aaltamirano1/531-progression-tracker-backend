@@ -27,7 +27,8 @@ function seedUserData() {
     for (let i = 1; i <= 10; i++) {
       seedData.push({
         username: faker.internet.userName().toLowerCase(),
-         password: password
+         password: password,
+         units: "kg."
       });
     }
     // this will return a promise
