@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const {app, runServer, closeServer} = require("../server");
 const {User} = require('../users/model');
 const {Exercise} = require('../exercises/model');
+const {Note} = require('../notes/model');
 const {TEST_DATABASE_URL} = require('../config');
 
 const expect = chai.expect;
@@ -45,7 +46,6 @@ function seedExerciseData(users) {
     	name: faker.lorem.word(),
   		orm: faker.random.number(),
   		week: 1,
-  		notes: [],
       user: users[0]
     });
   }
@@ -53,4 +53,17 @@ function seedExerciseData(users) {
   return Exercise.insertMany(seedData);
 }
 
-module.exports = {TEST_DATABASE_URL, User, Exercise, app, runServer, closeServer, tearDownDb, seedUserData, seedExerciseData}
+function seedNoteData(exercises) {
+  console.info('seeding note data');
+  const seedData = [];
+  for (let i = 1; i <= 10; i++) {
+    seedData.push({
+      content: faker.lorem.sentences(),
+      exercise: exercises[0]
+    });
+  }
+  // this will return a promise
+  return Exercise.insertMany(seedData);
+}
+
+module.exports = {TEST_DATABASE_URL, User, Exercise, Note, app, runServer, closeServer, tearDownDb, seedUserData, seedExerciseData}
